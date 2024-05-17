@@ -1,8 +1,32 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 export const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/mapi/homepage/getCards?lat=12.9351929&lng=77.62448069999999"
+    );
+
+    const json = await data.json();
+    // console.log(json);
+
+    setListOfRestaurants(
+      json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
+        .restaurants
+    );
+  };
+
+  if (listOfRestaurants.length === 0) {
+    return <Shimmer />;
+  }
+
+  //exploring the world 53:53
 
   return (
     <div className="body">
