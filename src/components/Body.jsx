@@ -22,13 +22,15 @@ export const Body = () => {
     );
   };
 
-  if (listOfRestaurants.length === 0) {
-    return <Shimmer />;
-  }
+  // if (listOfRestaurants.length === 0) {
+  //   return <Shimmer />;
+  // }
 
-  //exploring the world 53:53
+  //exploring the world 1 hour 1 min~
 
-  return (
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <button
