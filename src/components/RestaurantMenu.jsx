@@ -30,8 +30,11 @@ const RestaurantMenu = () => {
   const restaurantInfo = resInfo?.cards?.[2]?.card?.card?.info || {};
   const { name, cuisines = [], costForTwoMessage } = restaurantInfo;
 
+  console.log(restaurantInfo);
+  console.log(resInfo);
+
   const itemCardsArr =
-    resInfo?.cards?.[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card
+    resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[3]?.card
       ?.card || {};
   const itemCards = itemCardsArr?.itemCards || []; // <-- Highlighted line
 
@@ -50,7 +53,7 @@ const RestaurantMenu = () => {
           itemCards.map((item) => (
             <li key={item.card.info.id}>
               {item.card.info.name} - {"Rs."}
-              {item.card.info.price / 100}
+              {item.card.info.defaultPrice / 100}
             </li>
           ))
         ) : (
