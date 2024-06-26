@@ -1,31 +1,10 @@
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constant";
-
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  const [resInfo, setResInfo] = useState(null);
 
-  useEffect(() => {
-    fetchMenu();
-  }, [resId]);
-
-  const fetchMenu = async () => {
-    try {
-      const response = await fetch(MENU_API + resId);
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const json = await response.json();
-
-      setResInfo(json.data);
-    } catch (error) {
-      console.error("Error fetching menu:", error);
-    }
-  };
+  const resInfo = useRestaurantMenu(resId);
 
   const restaurantInfo = resInfo?.cards?.[2]?.card?.card?.info || {};
   const { name, cuisines = [], costForTwoMessage } = restaurantInfo;
@@ -34,9 +13,9 @@ const RestaurantMenu = () => {
   console.log(resInfo);
 
   const itemCardsArr =
-    resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[3]?.card
+    resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[4]?.card
       ?.card || {};
-  const itemCards = itemCardsArr?.itemCards || []; // <-- Highlighted line
+  const itemCards = itemCardsArr?.itemCards || [];
 
   console.log(itemCards);
 
@@ -53,7 +32,7 @@ const RestaurantMenu = () => {
           itemCards.map((item) => (
             <li key={item.card.info.id}>
               {item.card.info.name} - {"Rs."}
-              {item.card.info.defaultPrice / 100}
+              {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
             </li>
           ))
         ) : (
