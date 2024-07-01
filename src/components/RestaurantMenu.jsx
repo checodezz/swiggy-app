@@ -9,15 +9,17 @@ const RestaurantMenu = () => {
   const restaurantInfo = resInfo?.cards?.[2]?.card?.card?.info || {};
   const { name, cuisines = [], costForTwoMessage } = restaurantInfo;
 
-  console.log(restaurantInfo);
-  console.log(resInfo);
+  // console.log(restaurantInfo);
+  // console.log(resInfo);
 
   const itemCardsArr =
     resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[4]?.card
       ?.card || {};
   const itemCards = itemCardsArr?.itemCards || [];
 
-  console.log(itemCards);
+  console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
+
+  // console.log(itemCards);
 
   return resInfo === null ? (
     <Shimmer />

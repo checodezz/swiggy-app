@@ -22,7 +22,7 @@ export const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
 
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
@@ -34,7 +34,7 @@ export const Body = () => {
     );
   };
 
-  console.log(listOfRestaurants);
+  // console.log(listOfRestaurants);
 
   const onlineStatus = useOnlineStatus();
 
