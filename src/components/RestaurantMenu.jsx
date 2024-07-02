@@ -21,26 +21,23 @@ const RestaurantMenu = () => {
 
   // console.log(itemCards);
 
+  const categories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (cat) =>
+        cat?.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
+  console.log(categories);
+
   return resInfo === null ? (
     <Shimmer />
   ) : (
-    <div className="menu">
-      <h1>{name}</h1>
+    <div className="text-center">
+      <h1 className="font-bold ">{name}</h1>
       <p>
         {cuisines.join(", ")} - {costForTwoMessage}
       </p>
-      <ul>
-        {itemCards.length > 0 ? (
-          itemCards.map((item) => (
-            <li key={item.card.info.id}>
-              {item.card.info.name} - {"Rs."}
-              {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-            </li>
-          ))
-        ) : (
-          <li>No items available</li>
-        )}
-      </ul>
     </div>
   );
 };
