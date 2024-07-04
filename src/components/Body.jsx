@@ -25,16 +25,14 @@ export const Body = () => {
     // console.log(json);
 
     setListOfRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []
     );
     setFilteredRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []
     );
   };
-
-  // console.log(listOfRestaurants);
 
   const onlineStatus = useOnlineStatus();
 
