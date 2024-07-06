@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
 import { useState } from "react";
+
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
@@ -24,6 +25,10 @@ const RestaurantMenu = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
 
+  const toggleShowIndex = (index) => {
+    setShowIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
   return resInfo === null ? (
     <Shimmer />
   ) : (
@@ -38,8 +43,8 @@ const RestaurantMenu = () => {
         <RestaurantCategory
           key={index}
           data={category?.card?.card}
-          showItems={index === showIndex ? true : false}
-          setShowIndex={() => setShowIndex(index)}
+          showItems={index === showIndex}
+          setShowIndex={() => toggleShowIndex(index)}
         />
       ))}
     </div>
