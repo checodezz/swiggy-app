@@ -2,9 +2,8 @@ import { useState } from "react";
 import ItemList from "./ItemList";
 
 const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
-  // const [showItems, setShowItems] = useState("");
   const handleClick = () => {
-    setShowIndex(!showItems);
+    setShowIndex();
   };
   return (
     <div>
@@ -16,7 +15,7 @@ const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
           <span className="font-medium text-lg">
             {data.title} ({data.itemCards.length})
           </span>
-          <span>⬇️</span>
+          <span>{showItems ? "⬆️" : "⬇️"}</span>
         </div>
         {/* accordion body */}
         {showItems && <ItemList items={data.itemCards} />}
